@@ -24,15 +24,19 @@ Other improvements – Made some additional changes, fixed issues, and added tes
 - We should save every classify call, even if there is no `requestId`.
 
 ## Trade-offs
-I used plain SQL with a join for the list query because it is easy to read. The downside is that TypeScript cannot check the column names.
+I used plain SQL with a join for the list query because it is easy to read and give higher performance. But the downside is that TypeScript cannot check the column names.
 
-ARRAY_AGG loads all notes for each request just to get the latest one. This may become inefficient if the number of notes grows.
+
 
 After a status change or classification, the web app uses invalidateQueries to fetch the full list again. This can be improved by addling more complex implementation to data fetch logic.
 
 Classification history stores its own copy of the original message. This means the history remains available even if the original request is deleted, but the same message is stored twice replicate the data.
 
-My tests use mocks, so they can run without a database. However, they cannot confirm that the SQL works correctly
+Tests come in two types:
+- Mocks: I used mocks and run without a database. They cover the business rules quickly but cannot check SQL.
+- Integration tests (`requests.integration.test.ts`) start the real controller and services against PostgreSQL. They run the real SQL, migrations and transactions.
+
+The trade-off is that integration tests need Postgres. Locally they are skipped if no database is reachable.
 
 ## Classification history scope
 
@@ -55,4 +59,6 @@ PgAdmin: I configurted pgAdmin in docker compose to make it easier to observe th
 
  - Currently, classification runs in the main request flow. If we integrate an AI-based classifier, it could increase response times while waiting for the classification to complete. I would move this process to a background worker using a queue. This would keep the API responsive while the worker handles classification asynchronously.
 
-- Add pagination to `GET /requests` and history.
+ - Add pagination to `GET /requests` and history.
+
+ - While reviewing the classification work, I found that the request classifier runs before checking that the request exists. That logic needs to be refactored.
