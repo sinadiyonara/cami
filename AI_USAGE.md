@@ -11,24 +11,24 @@ Next, i could split the tasks in to individual smaller tasks and decided a plan 
 I noticed that this project environment isn't configured to support AI agents and their associated files.
 So i created bare minimum AI suppporred files including skills to streamline the development throughout the exercise.
 
-I used AI agents to complete smaller tasks by providing individual prompt. Where tasks were independent and could be handled simultaneously, I also used parallel execution to improve efficiency.
+I used AI agents to complete smaller tasks by providing individual prompts. Where tasks were independent and could be handled simultaneously, I also used parallel execution to improve efficiency.
 
 ## What I changed or rejected
 
-When setting up the AI environment, It first suggested a bigger setup with `AGENTS.md`, settings
+When setting up the AI environment, It first suggested a bigger setup with agents, settings
 and more skills, but that was too much for one assignment.
-I kept the setup small: two skills in `.claude/skills`, one for back end and one for front end. They
+I kept the setup small with two skills in `.claude/skills`, one for back end and one for front end. They
 have the repo rules and common mistakes. 
 
-New packages: it added `class-validator` and `class-transformer` for the refactor. I told it to remove them and updated the `skills` to avoid adding additional dependencies to this assignment project.
+New packages: it added some additional dependencies while fixing some issues. I mentioned it to remove them and updated the `skills` to avoid adding additional dependencies to this assignment project for future cases.
 
-pgAdmin: I configurted pgAdmin to make it easier to observe the db. its first version had saved servers, a password file, extra environment variables and a named volume. I removed senstitive data from it and added as a small service now in `docker-compose.yml`.
+PgAdmin: I configurted PgAdmin to make it easier to observe the db. its first version had saved servers, a password file, extra environment variables and a named volume. I removed some senstitive data from it and added as a small service now in `docker-compose.yml`.
 
-While moving the existing classification logic into a separate ClassificationService, AI also suggested some additional code improvements and refactoring. I decided not to include those changes in the commit because they were outside the scope and would make the commit history harder to follow.
+While moving the existing classification logic into a separate ClassificationService, AI also suggested some additional code improvements and refactoring. I decided not to include those changes in the commit because they were outside the scope and would make the commit history harder to read.
 
 When writing the tests, AI initially suggested a long list of test cases covering many areas. I worked with it to focus more on catching edge cases and potential bugs rather than simply increasing the number of tests.
 
-When optimizing the listing performance, AI implemented that with the LEFT JOIN intially. When i reviewing the code i found that it can be further optimized by LEFT JOIN LATERAL and refactored the code to support that.
+When optimizing the listing performance, AI implemented that with the LEFT JOIN intially. When i reviewing the code, i found that it can be further optimized by LEFT JOIN LATERAL and refactored the code to support that.
 
 ## Trade-offs
 With the help of AI, I could make more changes than you actually ask for. But for this exercise, I wanted to focus on how I work with AI to get things done. So I kept the scope fixed and made only the changes that were really needed.

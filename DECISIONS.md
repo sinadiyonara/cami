@@ -1,40 +1,38 @@
 # Decisions
 
 ## Prioritisation
-Fixed the CI pipeline – Started by fixing a variable naming issue in the GitHub Actions workflow.
+1. Fixed the CI pipeline: Started by fixing a variable naming issue in the GitHub Actions workflow.
 
-Set up pgAdmin – Added pgAdmin to make it easier to view and manage the database during development.
+2. Set up pgAdmin: Added pgAdmin to make it easier to observe and manage the database during development.
 
-Set up the AI development environment – Prepared the project for AI-assisted development.
+3. Set up the AI development environment: Prepared the project for AI-assisted development.
 
-Improved request listing – Updated RequestsService.list() to reduce database queries and avoid the N+1 query problem.
+4. Improved request listing api: Updated RequestsService.list() to reduce database queries and avoid the N+1 query problem.
 
-Updated query invalidation – Added invalidateQueries after mutations to make sure the UI gets the latest data.
+5. Updated query invalidation: Added invalidateQueries after mutations to make sure the UI is updated correctly.
 
-Created ClassificationService – Moved classification-related logic into a separate service to keep the code better organized.
+6. Created ClassificationService: Moved classification related logic into a separate service to keep the code better organized.
 
-Implemented classification history – Added the database changes and API logic needed to save and retrieve classification history.
+7. Implemented classification history: Added the database changes and API logic needed to save and retrieve classification history.
 
-Other improvements – Made some additional changes, fixed issues, and added tests where needed.
+8. Other improvements – Made some additional changes, fixed issues, folder restructurings and added tests where needed.
 
 ## Assumptions
-- since no authentication is implmemented, requiest authentication validation is not required at this stage
-- The keyword rules are fine as they are. I only moved them.
+- Since no authentication is implmemented, request authentication validation is not required at this stage
+- The keyword rules are kept as it is since it is enough for the assignment.
 - History should stay even if the request is deleted.
-- We should save every classify call, even if there is no `requestId`.
+- It should save every classify call, even if there is no `requestId`.
 
 ## Trade-offs
-I used plain SQL with a join for the list query because it is easy to read and give higher performance. But the downside is that TypeScript cannot check the column names.
+I used plain SQL with a join for the list() query because it is easy to read and give higher performance. But the downside is that TypeScript cannot check the column names.
 
-
-
-After a status change or classification, the web app uses invalidateQueries to fetch the full list again. This can be improved by addling more complex implementation to data fetch logic.
+After a status change or classification, the web app uses invalidateQueries to fetch the full list again. This can be improved by addling more complex implementation to data fetch logic with direct cache updates.
 
 Classification history stores its own copy of the original message. This means the history remains available even if the original request is deleted, but the same message is stored twice replicate the data.
 
 Tests come in two types:
-- Mocks: I used mocks and run without a database. They cover the business rules quickly but cannot check SQL.
-- Integration tests (`requests.integration.test.ts`) start the real controller and services against PostgreSQL. They run the real SQL, migrations and transactions.
+- Mock tests: I used mocks and run without a database. They cover the business rules quickly but cannot check SQL.
+- Integration tests: Start the real controller and services against PostgreSQL. They run the real SQL, migrations and transactions.
 
 The trade-off is that integration tests need Postgres. Locally they are skipped if no database is reachable.
 
@@ -62,3 +60,5 @@ PgAdmin: I configurted pgAdmin in docker compose to make it easier to observe th
  - Add pagination to `GET /requests` and history.
 
  - While reviewing the classification work, I found that the request classifier runs before checking that the request exists. That logic needs to be refactored.
+
+ - Custom invalidation for data fetching logic
