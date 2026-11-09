@@ -8,14 +8,14 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { RequestsService } from './requests.service';
+import { RequestsService } from '../services/requests.service';
 import {
   ClassificationHistory,
   ClassificationService,
   ClassifyRequestBody,
   ClassifyResponse,
-} from './classification.service';
-import { RequestStatus } from './customer-request.entity';
+} from '../services/classification.service';
+import { RequestStatus } from '../entities/customer-request.entity';
 
 @Controller('requests')
 export class RequestsController {

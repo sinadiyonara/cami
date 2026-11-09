@@ -1,12 +1,12 @@
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { ClassificationRecord } from './classification-record.entity';
-import { CLASSIFICATION_REPOSITORY, ClassificationRepository } from './classification-repository';
+import { ClassificationRecord } from '../entities/classification-record.entity';
+import { CLASSIFICATION_REPOSITORY, ClassificationRepository } from '../repositories/classification-repository';
 import {
   CLASSIFIER_PROVIDER,
   ClassificationResult,
   ClassifierProvider,
-} from './classifier-provider';
+} from '../classifiers/classifier-provider';
 import { RequestsService } from './requests.service';
 
 const HISTORY_LIMIT = 100;

@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
-import { CustomerRequest } from './requests/customer-request.entity';
-import { RequestNote } from './requests/request-note.entity';
-import { ClassificationRecord } from './requests/classification-record.entity';
+import { CustomerRequest } from './requests/entities/customer-request.entity';
+import { RequestNote } from './requests/entities/request-note.entity';
+import { ClassificationRecord } from './requests/entities/classification-record.entity';
 import { InitialSchema1710000000000 } from './migrations/1710000000000-InitialSchema';
 import { CreateClassifications1710000000002 } from './migrations/1710000000002-CreateClassifications';
 import { AddRequestNotesLatestIndex1710000000003 } from './migrations/1710000000003-AddRequestNotesLatestIndex';

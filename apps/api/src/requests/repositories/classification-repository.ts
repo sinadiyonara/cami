@@ -1,5 +1,5 @@
-import { ClassificationRecord } from './classification-record.entity';
-import { CustomerRequest } from './customer-request.entity';
+import { ClassificationRecord } from '../entities/classification-record.entity';
+import { CustomerRequest } from '../entities/customer-request.entity';
 
 export const CLASSIFICATION_REPOSITORY = Symbol('CLASSIFICATION_REPOSITORY');
 

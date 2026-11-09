@@ -4,15 +4,15 @@ import { NestFactory } from '@nestjs/core';
 import { AddressInfo } from 'node:net';
 import { DataSource } from 'typeorm';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { ClassificationRecord } from '../src/requests/classification-record.entity';
-import { ClassificationService } from '../src/requests/classification.service';
-import { ClassifierProvider } from '../src/requests/classifier-provider';
-import { CustomerRequest } from '../src/requests/customer-request.entity';
+import { ClassificationRecord } from '../src/requests/entities/classification-record.entity';
+import { ClassificationService } from '../src/requests/services/classification.service';
+import { ClassifierProvider } from '../src/requests/classifiers/classifier-provider';
+import { CustomerRequest } from '../src/requests/entities/customer-request.entity';
 import { createDataSource } from '../src/data-source';
-import { KeywordClassifier } from '../src/requests/keyword-classifier';
-import { RequestsController } from '../src/requests/requests.controller';
-import { RequestsService } from '../src/requests/requests.service';
-import { TypeOrmClassificationRepository } from '../src/requests/typeorm-classification.repository';
+import { KeywordClassifier } from '../src/requests/classifiers/keyword-classifier';
+import { RequestsController } from '../src/requests/controllers/requests.controller';
+import { RequestsService } from '../src/requests/services/requests.service';
+import { TypeOrmClassificationRepository } from '../src/requests/repositories/typeorm-classification.repository';
 
 /**
  * Runs the real routes, SQL and transactions against Postgres, because mocks cannot show

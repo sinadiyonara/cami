@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import { BadRequestException } from '@nestjs/common';
 import { describe, expect, it, vi } from 'vitest';
-import { ClassificationRepository } from '../src/requests/classification-repository';
-import { ClassificationService } from '../src/requests/classification.service';
-import { ClassificationResult, ClassifierProvider } from '../src/requests/classifier-provider';
-import { CustomerRequest, RequestStatus } from '../src/requests/customer-request.entity';
-import { RequestsService } from '../src/requests/requests.service';
+import { ClassificationRepository } from '../src/requests/repositories/classification-repository';
+import { ClassificationService } from '../src/requests/services/classification.service';
+import { ClassificationResult, ClassifierProvider } from '../src/requests/classifiers/classifier-provider';
+import { CustomerRequest, RequestStatus } from '../src/requests/entities/customer-request.entity';
+import { RequestsService } from '../src/requests/services/requests.service';
 
 const REQUEST_ID = '6f9619ff-8b86-4d11-b42d-00c04fc964ff';
 

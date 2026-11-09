@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { describe, expect, it, vi } from 'vitest';
 import { Repository } from 'typeorm';
-import { CustomerRequest } from '../src/requests/customer-request.entity';
-import { RequestsService } from '../src/requests/requests.service';
+import { CustomerRequest } from '../src/requests/entities/customer-request.entity';
+import { RequestsService } from '../src/requests/services/requests.service';
 
 function setup() {
   const repository = {

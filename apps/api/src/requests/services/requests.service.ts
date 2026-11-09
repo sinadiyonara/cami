@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CustomerRequest, RequestStatus } from './customer-request.entity';
+import { CustomerRequest, RequestStatus } from '../entities/customer-request.entity';
 
 export type RequestListItem = {
   id: string;

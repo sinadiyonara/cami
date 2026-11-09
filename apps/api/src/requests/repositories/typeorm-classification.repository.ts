@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { ClassificationRecord } from './classification-record.entity';
+import { ClassificationRecord } from '../entities/classification-record.entity';
 import {
   ClassificationFilter,
   ClassificationRepository,
   NewClassification,
 } from './classification-repository';
-import { CustomerRequest } from './customer-request.entity';
+import { CustomerRequest } from '../entities/customer-request.entity';
 
 @Injectable()
 export class TypeOrmClassificationRepository implements ClassificationRepository {
