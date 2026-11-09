@@ -23,8 +23,10 @@ export class RequestsService {
   ) {}
 
   async list(): Promise<RequestListItem[]> {
-    // LEFT JOIN keeps requests that have no notes. array_agg sorts each request's notes
-    // newest first, so [1] is the latest note.
+    // Each LATERAL subquery runs once per request against the
+    // (request_id, created_at DESC, id DESC) index: the count is an index-only scan and the
+    // latest note is a single LIMIT 1 probe, so only one note body per request is read.
+    // LEFT JOIN ... ON true keeps requests that have no notes.
     const rows: (Omit<RequestListItem, 'createdAt' | 'updatedAt'> & {
       createdAt: Date;
       updatedAt: Date;
@@ -37,11 +39,21 @@ export class RequestsService {
         r.confidence,
         r.created_at AS "createdAt",
         r.updated_at AS "updatedAt",
-        COUNT(n.id)::int AS "noteCount",
-        (ARRAY_AGG(n.body ORDER BY n.created_at DESC, n.id DESC))[1] AS "latestNotePreview"
+        nc.count AS "noteCount",
+        ln.body AS "latestNotePreview"
       FROM customer_requests r
-      LEFT JOIN request_notes n ON n.request_id = r.id
-      GROUP BY r.id
+      CROSS JOIN LATERAL (
+        SELECT COUNT(*)::int AS count
+        FROM request_notes n
+        WHERE n.request_id = r.id
+      ) nc
+      LEFT JOIN LATERAL (
+        SELECT n.body
+        FROM request_notes n
+        WHERE n.request_id = r.id
+        ORDER BY n.created_at DESC, n.id DESC
+        LIMIT 1
+      ) ln ON true
       ORDER BY r.created_at DESC, r.id DESC
     `);
 

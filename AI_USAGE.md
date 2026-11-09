@@ -28,6 +28,8 @@ While moving the existing classification logic into a separate ClassificationSer
 
 When writing the tests, AI initially suggested a long list of test cases covering many areas. I worked with it to focus more on catching edge cases and potential bugs rather than simply increasing the number of tests.
 
+When optimizing the listing performance, AI implemented that with the LEFT JOIN intially. When i reviewing the code i found that it can be further optimized by LEFT JOIN LATERAL and refactored the code to support that.
+
 ## Trade-offs
 With the help of AI, I could make more changes than you actually ask for. But for this exercise, I wanted to focus on how I work with AI to get things done. So I kept the scope fixed and made only the changes that were really needed.
 
