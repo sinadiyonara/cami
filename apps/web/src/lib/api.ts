@@ -22,6 +22,20 @@ export async function fetchRequests(): Promise<RequestListItem[]> {
   return res.json();
 }
 
+export type ClassificationHistoryItem = {
+  id: string;
+  requestId: string | null;
+  message: string;
+  category: string;
+  confidence: number;
+  provider: string;
+  createdAt: string;
+};
+
+export type ClassificationHistory = {
+  items: ClassificationHistoryItem[];
+};
+
 export type CreatedRequest = {
   id: string;
   message: string;
@@ -69,7 +83,7 @@ export async function classifyMessage(message: string, requestId?: string) {
   return res.json();
 }
 
-export async function fetchHistory(category?: string) {
+export async function fetchHistory(category?: string): Promise<ClassificationHistory> {
   const qs = category ? `?category=${encodeURIComponent(category)}` : '';
   const res = await fetch(`${API_URL}/requests/history${qs}`);
   if (!res.ok) {
