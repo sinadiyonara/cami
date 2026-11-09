@@ -47,6 +47,10 @@ The `/history` page now shows the records in a table with a category dropdown. I
 
 Error handling: Fixed invalid input responses to return proper HTTP 400 errors.
 
+Folder restructuring: Restructured the api codebase for better understanding and maintanance.
+
+PgAdmin: I configurted pgAdmin in docker compose to make it easier to observe the db.
+
 ## What you would do with more time
 
  - Currently, classification runs in the main request flow. If we integrate an AI-based classifier, it could increase response times while waiting for the classification to complete. I would move this process to a background worker using a queue. This would keep the API responsive while the worker handles classification asynchronously.

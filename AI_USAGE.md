@@ -22,7 +22,7 @@ have the repo rules and common mistakes.
 
 New packages: it added `class-validator` and `class-transformer` for the refactor. I told it to remove them and updated the `skills` to avoid adding additional dependencies to this assignment project.
 
-pgAdmin: I configurted pgAdmin to make it easier to observe the db. its first version had saved servers, a password file, extra environment variables and a named volume. I cut it down to the small service now in `docker-compose.yml`.
+pgAdmin: I configurted pgAdmin to make it easier to observe the db. its first version had saved servers, a password file, extra environment variables and a named volume. I removed senstitive data from it and added as a small service now in `docker-compose.yml`.
 
 While moving the existing classification logic into a separate ClassificationService, AI also suggested some additional code improvements and refactoring. I decided not to include those changes in the commit because they were outside the scope and would make the commit history harder to follow.
 
